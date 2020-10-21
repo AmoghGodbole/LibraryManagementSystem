@@ -1,0 +1,57 @@
+<%- include('../partials/header.ejs') %>
+<style>
+    
+    body{
+        height: 400vh;
+    }
+
+</style>
+
+<div class="container"> 
+    <% if(message.length > 0) { %>
+        <div class="text-center alert my-5" role="alert" style="background-color: lightgreen;"><%= message %></div> 
+    <% } %>   
+    <h1 class="display-2 text-center my-5">List Of Books Available In The Library</h1>
+    <% if(currentUser){ %>
+        <a style="display: block;" class="btn btn-outline-primary my-5" href="/book/new"> Add A Book To The Database </a>
+    <% } %>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Genres</th>
+                <th scope="col">Authors</th>
+                <th scope="col">Total</th>
+                <% if(currentUser){ %>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0; i<data.length; i++){ %>
+                <tr>
+                    <th><%= data[i].title %></th>
+                    <td><%= data[i].categories %></td>
+                    <td><%= data[i].authors %></td>
+                    <td><%= data[i].total %></td>
+                    <% if(currentUser){ %>
+                    <td>
+                        <form action="/books/<%= data[i].bid %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-outline-danger btn-sm">DELETE</button>
+                        </form>
+                    </td>
+                    <td> 
+                        <a href="/books/<%= data[i].bid %>/edit" class="btn btn-xs btn-outline-warning btn-sm">
+                            EDIT
+                        </a> 
+                    </td>
+                    <% } %>
+                </tr>
+            <% } %>
+
+        </tbody>
+    </table>
+</div>
+<%- include('../partials/footer.ejs') %>

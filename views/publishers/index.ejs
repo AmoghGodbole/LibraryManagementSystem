@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+<div class="container">    
+    <h1 class="display-2 text-center my-5">List Of Publishers</h1>
+    <% if(currentUser){ %>
+    <a style="display: block;" class="btn btn-outline-primary my-5" href="/publisher/new"> Add A Publisher To The Database </a>
+    <% } %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Address</th>
+                <% if(currentUser){ %>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0; i<data.length; i++){ %>
+                <tr>
+                        <th><%= data[i].name %></th>
+                        <td><%= data[i].mobile %></td>
+                        <td><%= data[i].address %></td>
+                        <% if(currentUser){ %>
+                        <td>
+                            <form action="/publishers/<%= data[i].pid %>?_method=DELETE" method="POST">
+                                <button class="btn btn-xs btn-outline-danger btn-sm">DELETE</button>
+                            </form>
+                        </td>
+                        <td> 
+                            <a href="/publishers/<%= data[i].pid %>/edit" class="btn btn-xs btn-outline-warning btn-sm">
+                                EDIT
+                            </a> 
+                        </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer.ejs') %>

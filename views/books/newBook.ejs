@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+    <div class="container text-center">
+        <h1 class="display-2 my-5">Enter details of the book:</h1>
+        <form class="text-center" action="/books" method="POST">
+            <div class="form-group">
+            <label for="title">Title: </label>
+            <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+            <label for="categories">Categories: </label>
+            <input type="text" class="form-control" id="categories" name="categories">
+            </div>
+            <div class="form-group">
+                <label for="authors">Authors: </label>
+                <input type="text" class="form-control" id="authors" name="authors">
+            </div>
+            <div class="form-group">
+                <label for="total">How many copies are available? </label>
+                <input type="number" class="form-control" id="total" name="total">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+<%- include('../partials/footer.ejs') %>
